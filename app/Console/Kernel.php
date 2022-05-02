@@ -16,9 +16,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-         $schedule->command('weather:fetch')->everyMinute();
+        $schedule->command('weather:fetch')->everyMinute();
 
-         $schedule->command('queue:prune-failed --hours:48')
+        $schedule->command('queue:prune-failed --hours:48')
              ->dailyAt('00:00')
              ->timezone('Africa/Lagos');
     }

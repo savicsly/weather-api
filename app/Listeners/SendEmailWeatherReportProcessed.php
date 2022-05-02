@@ -31,7 +31,7 @@ class SendEmailWeatherReportProcessed implements ShouldQueue
     {
         Log::debug((string)$event);
 
-        if(true) {
+        if (true) {
             Mail::to(config('app.admin_email'))->send(new WeatherReportProcessedNotification($event));
         }
     }

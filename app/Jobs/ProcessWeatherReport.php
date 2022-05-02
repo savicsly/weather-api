@@ -16,7 +16,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ProcessWeatherReport implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     public int $tries = 5;
 
@@ -43,8 +46,7 @@ class ProcessWeatherReport implements ShouldQueue
 
         $cities = Cities::getAll();
 
-        foreach($cities as $city) {
-
+        foreach ($cities as $city) {
             $response = $openWeatherApiService->getWeatherReport($city);
 
             $weather = Weather::query()
@@ -52,7 +54,7 @@ class ProcessWeatherReport implements ShouldQueue
                 ->where('date', Carbon::parse(now())->format('Y-m-d'))
                 ->first();
 
-            if(!$weather) {
+            if (!$weather) {
                 $weather = new Weather();
                 $weather->city = $city;
                 $weather->date = Carbon::now()->toDateString();
