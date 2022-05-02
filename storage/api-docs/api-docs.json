@@ -1,158 +1,156 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "Weather API Application",
-    "description": "Weather API Application",
-    "contact": {
-      "name": "Victor Bala",
-      "url": "http://www.github.com/savicsly",
-      "email": "savicsly@gmail.com"
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Weather API Application",
+        "description": "Weather API Application",
+        "contact": {
+            "name": "Victor Bala",
+            "url": "http://www.github.com/savicsly",
+            "email": "savicsly@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
     },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    },
-    "version": "1.0.0"
-  },
-  "paths": {
-    "/api/weather": {
-      "get": {
-        "tags": [
-          "Weather"
-        ],
-        "summary": "Get weather",
-        "description": "Get weather",
-        "operationId": "getWeather",
-        "requestBody": {},
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "data": {
-                      "properties": {
-                        "city": {
-                          "properties": {
-                            "name": {
-                              "type": "string",
-                              "example": "London"
-                            },
-                            "country": {
-                              "type": "string",
-                              "example": "GB"
-                            },
-                            "timezone": {
-                              "type": "string",
-                              "example": "3600"
-                            },
-                            "sunrise": {
-                              "type": "string",
-                              "example": "1650689287"
-                            },
-                            "sunset": {
-                              "type": "string",
-                              "example": "1650740953"
-                            },
-                            "coordinates": {
-                              "properties": {
-                                "lat": {
-                                  "type": "string",
-                                  "example": "51.5085"
-                                },
-                                "lon": {
-                                  "type": "string",
-                                  "example": "-0.1257"
+    "paths": {
+        "/api/weather": {
+            "get": {
+                "tags": ["Weather"],
+                "summary": "Get weather",
+                "description": "Get weather",
+                "operationId": "getWeather",
+                "requestBody": {},
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "properties": {
+                                                "city": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "London"
+                                                        },
+                                                        "country": {
+                                                            "type": "string",
+                                                            "example": "GB"
+                                                        },
+                                                        "timezone": {
+                                                            "type": "string",
+                                                            "example": "3600"
+                                                        },
+                                                        "sunrise": {
+                                                            "type": "string",
+                                                            "example": "1650689287"
+                                                        },
+                                                        "sunset": {
+                                                            "type": "string",
+                                                            "example": "1650740953"
+                                                        },
+                                                        "coordinates": {
+                                                            "properties": {
+                                                                "lat": {
+                                                                    "type": "string",
+                                                                    "example": "51.5085"
+                                                                },
+                                                                "lon": {
+                                                                    "type": "string",
+                                                                    "example": "-0.1257"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "temprature": {
+                                                    "properties": {
+                                                        "current": {
+                                                            "type": "string",
+                                                            "example": "16.36"
+                                                        },
+                                                        "min": {
+                                                            "type": "string",
+                                                            "example": "13.81"
+                                                        },
+                                                        "max": {
+                                                            "type": "string",
+                                                            "example": "17.85"
+                                                        },
+                                                        "feels_like": {
+                                                            "type": "string",
+                                                            "example": "15.57"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "pressure": {
+                                                    "type": "string",
+                                                    "example": "1003"
+                                                },
+                                                "humidity": {
+                                                    "type": "string",
+                                                    "example": "58"
+                                                },
+                                                "wind": {
+                                                    "properties": {
+                                                        "speed": {
+                                                            "type": "string",
+                                                            "example": "9.77"
+                                                        },
+                                                        "deg": {
+                                                            "type": "string",
+                                                            "example": "70"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "clouds": {
+                                                    "type": "string",
+                                                    "example": "40"
+                                                },
+                                                "weather": {
+                                                    "properties": {
+                                                        "main": {
+                                                            "type": "string",
+                                                            "example": "Clouds"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "scattered clouds"
+                                                        },
+                                                        "icon": {
+                                                            "type": "string",
+                                                            "example": "03d.png"
+                                                        },
+                                                        "visibility": {
+                                                            "type": "string",
+                                                            "example": "10000"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "date": {
+                                                    "type": "string",
+                                                    "example": "2022-05-01"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
-                              },
-                              "type": "object"
                             }
-                          },
-                          "type": "object"
-                        },
-                        "temprature": {
-                          "properties": {
-                            "current": {
-                              "type": "string",
-                              "example": "16.36"
-                            },
-                            "min": {
-                              "type": "string",
-                              "example": "13.81"
-                            },
-                            "max": {
-                              "type": "string",
-                              "example": "17.85"
-                            },
-                            "feels_like": {
-                              "type": "string",
-                              "example": "15.57"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "pressure": {
-                          "type": "string",
-                          "example": "1003"
-                        },
-                        "humidity": {
-                          "type": "string",
-                          "example": "58"
-                        },
-                        "wind": {
-                          "properties": {
-                            "speed": {
-                              "type": "string",
-                              "example": "9.77"
-                            },
-                            "deg": {
-                              "type": "string",
-                              "example": "70"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "clouds": {
-                          "type": "string",
-                          "example": "40"
-                        },
-                        "weather": {
-                          "properties": {
-                            "main": {
-                              "type": "string",
-                              "example": "Clouds"
-                            },
-                            "description": {
-                              "type": "string",
-                              "example": "scattered clouds"
-                            },
-                            "icon": {
-                              "type": "string",
-                              "example": "03d.png"
-                            },
-                            "visibility": {
-                              "type": "string",
-                              "example": "10000"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "date": {
-                          "type": "string",
-                          "example": "2022-05-01"
                         }
-                      },
-                      "type": "object"
                     }
-                  },
-                  "type": "object"
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
