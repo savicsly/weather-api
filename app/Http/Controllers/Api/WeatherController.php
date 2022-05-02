@@ -20,7 +20,8 @@ class WeatherController extends Controller
      */
     public function __construct(
         protected OpenWeatherApiService $openWeatherApiService
-    ){}
+    ) {
+    }
 
 
     /**
@@ -108,10 +109,9 @@ class WeatherController extends Controller
         $weather = Weather::where('city', $city)->where('date', $date)->first();
 
         if (!$weather) {
-
             $response = $this->openWeatherApiService->getHistoricReport($city, Carbon::parse($date)->timestamp);
 
-            if($response['cod'] == 401) {
+            if ($response['cod'] == 401) {
                 return response()->json([
                     'message' => $response['message'],
                 ], $response['cod']);
@@ -127,6 +127,5 @@ class WeatherController extends Controller
         return (new WeatherResource($weather->refresh()))
             ->response()
             ->setStatusCode(200);
-
     }
 }

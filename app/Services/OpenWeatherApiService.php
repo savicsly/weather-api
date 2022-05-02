@@ -28,7 +28,7 @@ class OpenWeatherApiService
         $lon = $cord[0]['lon'];
 
 
-        if($cord) {
+        if ($cord) {
             return Http::get("http://history.openweathermap.org/data/2.5/history/city?lat={$lat}&lon={$lon}&type=hour&start={$date}&appid={$this->apiKey}")
                 ->json();
         }

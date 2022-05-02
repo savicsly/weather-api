@@ -34,6 +34,5 @@ class FetchWeatherReport extends Command
         ProcessWeatherReport::dispatch();
 
         Log::info('Latest weather report syncing completed at' . now());
-
     }
 }

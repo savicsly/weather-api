@@ -17,9 +17,7 @@
     "paths": {
         "/api/weather": {
             "get": {
-                "tags": [
-                    "Weather"
-                ],
+                "tags": ["Weather"],
                 "summary": "Get weather",
                 "description": "Get weather",
                 "operationId": "getWeather",

@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class WeatherReportProcessedNotification extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * @var mixed|null
