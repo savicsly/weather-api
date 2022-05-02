@@ -79,7 +79,7 @@ class WeatherController extends Controller
      *                      type="object",
      *                      @OA\Property(property="main", type="string", example="Clouds"),
      *                      @OA\Property(property="description", type="string", example="scattered clouds"),
-     *                      @OA\Property(property="icon", type="string", example="03d.png"),
+     *                      @OA\Property(property="icon", type="string", example="http://openweathermap.org/img/wn/03d@2x.png"),
      *                      @OA\Property(property="visibility", type="string", example="10000"),
      *                  ),
      *                  @OA\Property(property="date", type="string", example="2022-05-01"),
@@ -92,38 +92,39 @@ class WeatherController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'city' => ['required', 'string', new Enum(Cities::class)],
-            'date' => ['required', 'date:Y-m-d'],
+            'date' => ['required', 'date'],
         ]);
 
         if ($validator->fails()) {
             return response()->json([
+                'message' => 'Validation error.',
                 'error' => $validator->errors()
             ], 422);
         }
 
         $city = $request->input('city');
-        $date = $request->input('date');
+        $date = Carbon::parse($request->input('date'))->format('Y-m-d');
 
         $weather = Weather::where('city', $city)->where('date', $date)->first();
 
         if (!$weather) {
 
-            $response = $this->openWeatherApiService->getWeather($city);
+            $response = $this->openWeatherApiService->getHistoricReport($city, Carbon::parse($date)->timestamp);
+
+            if($response['cod'] == 401) {
+                return response()->json([
+                    'message' => $response['message'],
+                ], $response['cod']);
+            }
 
             $weather = new Weather();
             $weather->city = $city;
             $weather->date = Carbon::parse($date)->format('Y-m-d');
-            $weather->data = json_encode($response);
+            $weather->data = $response;
             $weather->save();
-
-//            $weather = Weather::create([
-//                'city' => $city,
-//                'date' => Carbon::parse($date)->format('Y-m-d'),
-//                'data' => json_encode($response)
-//            ]);
         }
 
-        return (new WeatherResource($weather))
+        return (new WeatherResource($weather->refresh()))
             ->response()
             ->setStatusCode(200);
 

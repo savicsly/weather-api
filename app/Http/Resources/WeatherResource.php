@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class WeatherResource extends JsonResource
@@ -10,10 +12,10 @@ class WeatherResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'city' => [
@@ -43,10 +45,10 @@ class WeatherResource extends JsonResource
             'weather' => [
                 'main' => $this->data['weather'][0]['main'],
                 'description' => $this->data['weather'][0]['description'],
-                'icon' => $this->data['weather'][0]['icon'] . '.png',
+                'icon' => 'http://openweathermap.org/img/wn/' . $this->data['weather'][0]['icon'] . '@2x.png',
                 'visibility' => $this->data['visibility'],
             ],
-            'date' => Carbon::parse($this->data['dt'])->format('Y-m-d'),
+            'date' => date('Y-m-d', $this->data['dt']),
         ];
     }
 }

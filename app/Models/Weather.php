@@ -13,10 +13,6 @@ class Weather extends Model
 
     protected $casts = [
         'date' => 'date:Y-m-d',
+        'data' => 'array',
     ];
-
-    public function getDataAttribute($value)
-    {
-        return json_decode($value, true);
-    }
 }
